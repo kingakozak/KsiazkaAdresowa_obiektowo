@@ -19,12 +19,13 @@ string AdresatMenadzer::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst)
     }
     return tekst;
 }
-Adresat AdresatMenadzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika, int idOstatniegoAdresata)
+Adresat AdresatMenadzer::podajDaneNowegoAdresata()
 {
     Adresat adresat;
 
-    adresat.ustawId(++idOstatniegoAdresata);
-    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
+    adresat.ustawId((plikZAdresatami.pobierzIdOstatniegoAdresata()+1));
+    cout<<plikZAdresatami.pobierzIdOstatniegoAdresata()<<endl;
+    adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze::wczytajLinie());
@@ -45,18 +46,20 @@ Adresat AdresatMenadzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika, 
 
     return adresat;
 }
-int AdresatMenadzer::dodajAdresata(int idZalogowanegoUzytkownika) // do funkcji przekazuje te zmienne, do których dostêpu nie mam w klauie
+void AdresatMenadzer::dodajAdresata() // do funkcji przekazuje te zmienne, do których dostêpu nie mam w klauie
 {
     Adresat adresat;
-    int idOstatniegoAdresata = plikZAdresatami.pobierzZPlikuIdOstatniegoAdresata();
+    //int idOstatniegoAdresata = plikZAdresatami.pobierzZPlikuIdOstatniegoAdresata();
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata(idZalogowanegoUzytkownika, idOstatniegoAdresata);
+    adresat = podajDaneNowegoAdresata();
 
     adresaci.push_back(adresat);
-    plikZAdresatami.dopiszAdresataDoPliku(adresat);
-
-    return ++idOstatniegoAdresata;
+    if(plikZAdresatami.dopiszAdresataDoPliku(adresat))
+        cout<<"Zostal dodany nowy adresat"<<endl;
+    else
+        cout<<"Blad - nie udalo sie dodac nowego adresata"<<endl;
+    system("pause");
 }
 
 void AdresatMenadzer::wyswietlDaneAdresata(Adresat adresat)

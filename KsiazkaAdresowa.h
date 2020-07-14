@@ -1,4 +1,5 @@
 #include <iostream>
+#include <windows.h>
 #include "UzytkownikMenedzer.h"
 #include "AdresatMenedzer.h"
 
@@ -7,7 +8,8 @@ using namespace std;
 class KsiazkaAdresowa
 {
     UzytkownikMenedzer uzytkownikMenedzer;
-    AdresatMenadzer adresatMenadzer;
+    AdresatMenadzer *adresatMenadzer;
+    const string NAZWA_PLIKU_Z_ADRESATAMI;
 
 public:
     void rejestracjaUzytkownika();
@@ -15,14 +17,22 @@ public:
     int logowanieUzytkkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
     void wylogujUzytkownika();
-    int dodajAdresata();
+    void dodajAdresata();
     void wyswietlWszystkichAdresatow();
     void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
-    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami, string nazwaPlikuZAdresatami) : uzytkownikMenedzer(nazwaPlikuZUzytkownikami),
-    adresatMenadzer(nazwaPlikuZAdresatami)
+    bool czyUzytkownikJestZalogowany();
+    char wybierzOpcjeZMenuGlownego();
+    char wybierzOpcjeZMenuUzytkownika();
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami, string nazwaPlikuZAdresatami)
+    : uzytkownikMenedzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) //nazwa pliku od razu wysylam do uzytkownik menadzera a nazwe pliku z adreatami od razu zapisuje do stalej
     {
-    uzytkownikMenedzer.wczytajUzytkownikowZPliku();
+        adresatMenadzer = NULL;
     };
+    ~KsiazkaAdresowa()
+    {
+        delete adresatMenadzer;
+        adresatMenadzer = NULL;
+    }
 };
 
 

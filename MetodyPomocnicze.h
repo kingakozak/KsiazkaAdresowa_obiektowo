@@ -13,6 +13,7 @@ public:
     static string wczytajLinie();
     static bool czyPlikJestPusty(fstream &plikTekstowy);
     static string pobierzLiczbe(string tekst, int pozycjaZnaku);
+    static char wczytajZnak();
 
 };
 #endif
