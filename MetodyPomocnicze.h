@@ -11,9 +11,10 @@ public:
     static string konwerjsaIntNaString(int liczba);
     static int konwersjaStringNaInt(string liczba);
     static string wczytajLinie();
-    static bool czyPlikJestPusty(fstream &plikTekstowy);
     static string pobierzLiczbe(string tekst, int pozycjaZnaku);
     static char wczytajZnak();
+    static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
+    static int wczytajLiczbeCalkowita();
 
 };
 #endif

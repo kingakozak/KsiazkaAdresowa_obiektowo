@@ -10,6 +10,7 @@ class KsiazkaAdresowa
     UzytkownikMenedzer uzytkownikMenedzer;
     AdresatMenadzer *adresatMenadzer;
     const string NAZWA_PLIKU_Z_ADRESATAMI;
+    const string NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
 
 public:
     void rejestracjaUzytkownika();
@@ -23,8 +24,12 @@ public:
     bool czyUzytkownikJestZalogowany();
     char wybierzOpcjeZMenuGlownego();
     char wybierzOpcjeZMenuUzytkownika();
-    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami, string nazwaPlikuZAdresatami)
-    : uzytkownikMenedzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) //nazwa pliku od razu wysylam do uzytkownik menadzera a nazwe pliku z adreatami od razu zapisuje do stalej
+    void wyszukajAdresatowPoImieniu();
+    void wyszukajAdresatowPoNazwisku();
+    int usunAdresata();
+    void edytujAdresata();
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami, string nazwaPlikuZAdresatami, string nazwaTymczasowegoPlikuZAdresatami)
+    : uzytkownikMenedzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami) //nazwa pliku od razu wysylam do uzytkownik menadzera a nazwe pliku z adreatami od razu zapisuje do stalej
     {
         adresatMenadzer = NULL;
     };

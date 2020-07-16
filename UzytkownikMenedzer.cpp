@@ -49,7 +49,7 @@ bool UzytkownikMenedzer::czyIstniejeLogin(string login)
         if(uzytkownicy[i].pobierzLogin() ==login) //to do logowania zamiast itr
         {
             cout << endl << "Istnieje uzytkownik o takim loginie." << endl;
-        return true;
+            return true;
         }
     }
     return false;
@@ -75,18 +75,14 @@ int UzytkownikMenedzer::logowanieUzytkownika()
     for(int i = 0; i <uzytkownicy.size(); i++)
     {
         if(uzytkownicy[i].pobierzLogin() ==login)
-   /* vector <Uzytkownik>::iterator itr = uzytkownicy.begin(); // zamiast itr for jak wyżej
-    while (itr != uzytkownicy.end())
-    {
-        if (itr -> login == login)*/
         {
             for (int iloscProb = 3; iloscProb > 0; iloscProb--)
             {
                 cout << "Podaj haslo. Pozostalo prob: " << iloscProb << ": ";
                 haslo = MetodyPomocnicze::wczytajLinie();
 
-if(uzytkownicy[i].pobierzHaslo() ==haslo)
-             {
+                if(uzytkownicy[i].pobierzHaslo() ==haslo)
+                {
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
                     idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
@@ -109,9 +105,6 @@ void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
     cout << "Podaj nowe haslo: ";
     noweHaslo = MetodyPomocnicze::wczytajLinie();
 
-   /* for (vector <Uzytkownik>::iterator itr = uzytkownicy.begin(); itr != uzytkownicy.end(); itr++) // itr na for
-    {
-        if (itr -> id == idZalogowanegoUzytkownika)*/
     for(int i = 0; i <uzytkownicy.size(); i++)
     {
         if(uzytkownicy[i].pobierzId()==idZalogowanegoUzytkownika)
@@ -132,12 +125,12 @@ bool UzytkownikMenedzer::czyUzytkownikJestZalogowany()
     else
         return false;
 }
- void UzytkownikMenedzer::wylogujUzytkownika()
- {
+void UzytkownikMenedzer::wylogujUzytkownika()
+{
     idZalogowanegoUzytkownika = 0;
- }
+}
 
- int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
- {
-     return idZalogowanegoUzytkownika;
- }
+int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
+{
+    return idZalogowanegoUzytkownika;
+}

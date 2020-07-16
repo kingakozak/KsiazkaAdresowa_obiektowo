@@ -2,6 +2,7 @@
 #include "MetodyPomocnicze.h"
 #include <sstream>
 #include <fstream>
+#include <algorithm>>
 
 using namespace std;
 
@@ -25,14 +26,6 @@ string MetodyPomocnicze::wczytajLinie()
     string wejscie = "";
     getline(cin, wejscie);
     return wejscie;
-}
-bool MetodyPomocnicze::czyPlikJestPusty(fstream &plikTekstowy)
-{
-    plikTekstowy.seekg(0, ios::end);
-    if (plikTekstowy.tellg() == 0)
-        return true;
-    else
-        return false;
 }
 string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku)
 {
@@ -61,4 +54,29 @@ char MetodyPomocnicze::wczytajZnak()
         cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
     }
     return znak;
+}
+string MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst)
+{
+    if (!tekst.empty())
+    {
+        transform(tekst.begin(), tekst.end(), tekst.begin(), ::tolower);
+        tekst[0] = toupper(tekst[0]);
+    }
+    return tekst;
+}
+int MetodyPomocnicze::wczytajLiczbeCalkowita()
+{
+    string wejscie = "";
+    int liczba = 0;
+
+    while (true)
+    {
+        getline(cin, wejscie);
+
+        stringstream myStream(wejscie);
+        if (myStream >> liczba)
+            break;
+        cout << "To nie jest liczba. Wpisz ponownie. " << endl;
+    }
+    return liczba;
 }

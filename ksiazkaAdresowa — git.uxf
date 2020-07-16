@@ -7,12 +7,14 @@
       <x>10</x>
       <y>10</y>
       <w>320</w>
-      <h>260</h>
+      <h>330</h>
     </coordinates>
     <panel_attributes>KsiazkaAdresowa
 -----------------
 - UzytkownikMenadzer:urzytkownikMenadzer;
 - AdresatMenedzer:adrsatMenedzer;
+- NAZWA_PLIKU_Z_ADRESATAMI;
+- NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
 ------------
 + UzytkownikMenedzer:plikZUzytkownikami;
 + rejestracjaUzytkownika():void;
@@ -24,6 +26,13 @@
 + dodajAdresata():int
 + wyswietlWszystkichAdresatow()void;
 + wczytajAdresatowZalogowanegoUzytkownikaZPliku():void
++ czyUzytkownikJestZalogowany():bool
++ wybierzOpcjeZMenuGlownego():char
++ wybierzOpcjeZMenuUzytkownika():char
++ wyszukajAdresatowPoImieniu():void
++ wyszukajAdresatowPoNazwisku():void
++ usunAdresata():int
++ edytujAdresata()void
 
 </panel_attributes>
     <additional_attributes/>
@@ -65,17 +74,17 @@
 ------------
 + rejestracjaUzytkownika (): void
 + logowanieUzytkkownika (): integer
-- wczytajLinie():string
 + wypiszWszystkichUzytkownikow():void
-+ wczytajUzytkownikowZPliku():void
 - podajDaneNowegoUzytkownika():Uzytkownik
 - pobierzIdNowegoUzytkownika(): int
 - czyIstniejeLogin(string login): bool
+- PlikZUzytkownikami plikZUzytkownikami;
 + zmianaHaslaZalogowanegoUzytkownika():void
 + wylogujUzytkownika():void;
 - PlikZUzytkownikami plikZUzytkownikami;
 + UzytkownikMenedzer:plikZUzytkownikami;
-
++ pobierzIdZalogowanegoUzytkownika():int
++ czyUzytkownikJestZalogowany():bool
 
 </panel_attributes>
     <additional_attributes/>
@@ -86,29 +95,26 @@
       <x>620</x>
       <y>10</y>
       <w>450</w>
-      <h>190</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>PlikZUzytkownikami
 ---------------
-- nazwaPlikuZUzytkownikami:const string
------------------
 + PlikZUzytkownikami();
 + dopiszUzytkownikaDoPliku():void
 + wczytajUzytkownikowZPliku():void
-- czyPlikJestPusty():bool
 - zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami():string
 + zapiszWszystkichUzytkownikowDoPliku():void
-- pobierzDaneUzytkownika(i);
+- pobierzDaneUzytkownika();
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>700</x>
-      <y>470</y>
-      <w>370</w>
-      <h>120</h>
+      <x>370</x>
+      <y>280</y>
+      <w>210</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --------------
@@ -116,16 +122,19 @@
 + konwersjaStringNaInt():int
 + pobierzLiczbe()int
 + wczytajLinie():string
-+ czyPlikJestPusty():bool</panel_attributes>
++ wczytajZnak():char
++ zamienPierwszaLitereNaDuzaAPozostaleNaMale():string
++ wczytajLiczbeCalkowita():int
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>370</x>
-      <y>200</y>
+      <y>120</y>
       <w>220</w>
-      <h>170</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Adresat
 -------------
@@ -157,24 +166,30 @@
     <id>UMLClass</id>
     <coordinates>
       <x>620</x>
-      <y>230</y>
+      <y>190</y>
       <w>450</w>
       <h>230</h>
     </coordinates>
     <panel_attributes>PlikZAdresatami
 ---------------
-- nazwaPlikuZAdresatami:const string
+- NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
 -----------------
+- zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami():string
 + dopiszAdresataDoPliku();
 - zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami():string
 + wczytajAdresatowZalogowanegoUzytkownikaZPliku
 - pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami():int
 - pobierzDaneAdresata():Adresat
 - pobierzIdAdresataZDanychOddzielonychPionowymiKreskami():int
-+ dopiszAdresataDoPliku():void
 + PlikZAdresatami:nazwaPlikuZAdresatami;
 + wczytajAdresatowZalogowanegoUzytkownikaZPliku():vctor
-+ pobierzZPlikuIdOstatniegoAdresata():int</panel_attributes>
++ pobierzZPlikuIdOstatniegoAdresata():int
++ usunWybranaLinieWPliku():void
++ zaktualizujDaneWybranegoAdresata():void
+- usunPlik ():void
+- zmienNazwePliku():void
+- podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata():int
+- edytujWybranaLinieWPliku():void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -188,6 +203,7 @@
     <panel_attributes>AdresatMenedzer
 -----------
 - vector &lt;Adresat&gt; adresaci
+const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
 ------------
 + AdresatMenadzer:plikZAdresatami:
 - PlikZAdresatami plikZAdresatami;
@@ -197,7 +213,31 @@
 - wyswietlDaneAdresata():void 
 + wczytajAdresatowZalogowanegoUzytkownikaZPliku():void
 - zamienPierwszaLitereNaDuzaAPozostaleNaMale():string
-+ wyswietlWszystkichAdresatow():void</panel_attributes>
++ wyswietlWszystkichAdresatow():void
++ wyszukajAdresatowPoImieniu():void
++ wyszukajAdresatowPoNazwisku():void
++  usunAdresata(): int
++ edytujAdresata(): void
+- wyswietlIloscWyszukanychAdresatow():void
+- podajIdWybranegoAdresata():int
+- wybierzOpcjeZMenuEdycja():char</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>430</y>
+      <w>220</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>PlikTekstowy
+-----------
+const string NAZWA_PLIKU;
+----------
++ pobierzNazwePliku(): string
++ PlikTekstowy ({}
++ czyPlikJestPusty():bool</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

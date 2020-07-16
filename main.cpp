@@ -5,12 +5,11 @@ using namespace std;
 
 int main()
 {
-    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt","Adresaci.txt");
+    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt","Adresaci.txt","Adresaci_Tymczasowo.txt");
     char wybor;
-     while (true)
+    while (true)
     {
         if (ksiazkaAdresowa.czyUzytkownikJestZalogowany()!=true)
-
         {
             wybor = ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
 
@@ -33,21 +32,26 @@ int main()
         }
         else
         {
-            /*if (adresaci.empty() == true)
-                // Pobieramy idOstatniegoAdresata, po to aby zoptymalizowac program.
-                // Dzieki temu, kiedy uztykwonik bedzie dodawal nowego adresata
-                // to nie bedziemy musieli jeszcze raz ustalac idOstatniegoAdresata
-                idOstatniegoAdresata = wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);*/
-
             wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
-
             switch (wybor)
             {
             case '1':
                 ksiazkaAdresowa.dodajAdresata();
                 break;
+            case '2':
+                ksiazkaAdresowa.wyszukajAdresatowPoImieniu();
+                break;
+            case '3':
+                ksiazkaAdresowa.wyszukajAdresatowPoNazwisku();
+                break;
             case '4':
                 ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+                break;
+            case '5':
+                ksiazkaAdresowa.usunAdresata();
+                break;
+            case '6':
+                ksiazkaAdresowa.edytujAdresata();
                 break;
             case '7':
                 ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
@@ -58,16 +62,5 @@ int main()
             }
         }
     }
-    /*
-    //ksiazkaAdresowa.rejestracjaUzytkownika();
-    ksiazkaAdresowa.wypiszWszystkichUzytkownikow();
-    ksiazkaAdresowa.logowanieUzytkkownika();
-    ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku();
-    ksiazkaAdresowa.dodajAdresata();
-    ksiazkaAdresowa.wyswietlWszystkichAdresatow();
-    //ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
-    //ksiazkaAdresowa.wylogujUzytkownika();
-
-*/
     return 0;
 }

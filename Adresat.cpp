@@ -4,10 +4,10 @@
 using namespace std;
 
 void Adresat::ustawId(int noweId)
-    {
-        if(noweId >=0)
+{
+    if(noweId >=0)
         id=noweId;
-    }
+}
 void Adresat::ustawIdUzytkownika(int noweIdUzytkownika)
 {
     idUzytkownika=noweIdUzytkownika;
@@ -34,9 +34,9 @@ void Adresat::ustawAdres (string nowyAdres)
 }
 
 int Adresat::pobierzId()
-    {
-        return id;
-    }
+{
+    return id;
+}
 int Adresat::pobierzIdUzytkownika()
 {
     return idUzytkownika;
